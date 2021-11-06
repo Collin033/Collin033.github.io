@@ -180,47 +180,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-         <span id="more"></span>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://acm.hdu.edu.cn/showproblem.php?pid=1203" title="I NEED A OFFER!">题源hdu1203</a>   </p>
-</blockquote>
-<pre><code class="c,cpp">#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
-using namespace std;
-int a[10001]=&#123;0&#125;;
-double b[10005]=&#123;0.0&#125;,dp[10005]=&#123;0.0&#125;;
-int main()
-&#123;
-   int n,m;
-   while(~scanf(&quot;%d%d&quot;,&amp;n,&amp;m))
-   &#123;
-       if(n==0 &amp;&amp; m==0)
-           break;
-       for(int i=0;i&lt;m;i++)
-       &#123;
-           cin&gt;&gt;a[i]&gt;&gt;b[i];
-           b[i]=1-b[i];
-       &#125;
-       for(int i=0;i&lt;=n;i++)
-           dp[i]=1.0;
-       for(int i=0;i&lt;m;i++)
-       &#123;
-           for(int j=n;j&gt;=a[i];j--)
-           &#123;
-               dp[j]=min(dp[j],dp[j-a[i]]*b[i]);
-           &#125;
-       &#125;    
-       printf(&quot;%.1lf%%\n&quot;,100*(1.0-dp[n]));
-   &#125;
-   
-   return 0;
-&#125;
-</code></pre>
-<p>这道题是一道典型的01背包问题<br>前面的输入不用多说，关键部分是从第十九行后开始，我们要求至少有一个的概率，求至少一份比较难求，我们可以转换为求他的对立面，一份都没有的概率p,然后1-p即为所求。dp[j]是记录当剩余j万美金时选j的最小概率，我们拿当i=2，j=n时来举例，当i等于2时，dp[j-a[i]]*b[i]就为如果我选了第2个那么没offer的概率为第二个没选上的概率乘还剩n-a[i]美元时可选择的最小美元。所以如此循环，每轮dp[j]即保存了当轮每个剩余多少钱时选择的最小概率。当循环完后的dp[n]即为给了n元选择的最小概率</p>
-<hr>
-<p>（由于不会画表格，比较难解释，附上一些网络上的题解及背包问题的入门）<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011815404/article/details/79773498?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163616721816780366513428%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=163616721816780366513428&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-2-79773498.pc_search_result_cache&utm_term=hdu1203&spm=1018.2226.3001.4187" title="I NEED A OFFER!（HDU-1203）">题解</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38410730/article/details/81667885?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163616139216780366562357%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=163616139216780366562357&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-3-81667885.pc_search_result_cache&utm_term=01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98&spm=1018.2226.3001.4187" title="【动态规划】01背包问题（通俗易懂，超基础讲解）">01背包问题</a></p>
-
+        <h2 id="以第三周周赛H题浅谈01背包问题"><a href="#以第三周周赛H题浅谈01背包问题" class="headerlink" title="以第三周周赛H题浅谈01背包问题"></a>以第三周周赛H题浅谈01背包问题</h2>
+        
+          <a class="article-more-a" href="/2021/11/06/%E4%BB%A5%E7%AC%AC%E4%B8%89%E5%91%A8%E5%91%A8%E8%B5%9BH%E9%A2%98%E6%B5%85%E8%B0%8801%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/#more">more >></a>
+        
       
 
       
