@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://Collin033.github.io">
-  <title>初学习快速幂 | Collin</title>
+  <title>第二周题单题解 | Collin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="快速幂的几个模板">
+  <meta name="description" content="GDUFE2022_ACM 第二周题单A - 加工生产调度 题意中文题面且不长，这个应该不用解释了吧 思路这道题是一道贪心题，由题意每个产品都先进入A车间加工后进入B车间加工，那么容易得出A机器将会不停地进行作业，但B机器在加工过程中有可能要等待A机器。我们注意到两个关键的时间点：第一个部件在A机器上加工时，B机器必须等待；最后一个部件在B机器上加工时，A机器也必须等待B机器的完工。   由上可以">
 <meta property="og:type" content="article">
-<meta property="og:title" content="初学习快速幂">
-<meta property="og:url" content="https://collin033.github.io/2021/11/01/%E5%88%9D%E5%AD%A6%E4%B9%A0%E5%BF%AB%E9%80%9F%E5%B9%82/index.html">
+<meta property="og:title" content="第二周题单题解">
+<meta property="og:url" content="https://collin033.github.io/2022/10/27/%E7%AC%AC%E4%BA%8C%E5%91%A8%E9%A2%98%E5%8D%95%E9%A2%98%E8%A7%A3/index.html">
 <meta property="og:site_name" content="Collin">
-<meta property="og:description" content="快速幂的几个模板">
+<meta property="og:description" content="GDUFE2022_ACM 第二周题单A - 加工生产调度 题意中文题面且不长，这个应该不用解释了吧 思路这道题是一道贪心题，由题意每个产品都先进入A车间加工后进入B车间加工，那么容易得出A机器将会不停地进行作业，但B机器在加工过程中有可能要等待A机器。我们注意到两个关键的时间点：第一个部件在A机器上加工时，B机器必须等待；最后一个部件在B机器上加工时，A机器也必须等待B机器的完工。   由上可以">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-11-01T15:15:08.000Z">
-<meta property="article:modified_time" content="2021-11-01T15:55:22.239Z">
+<meta property="article:published_time" content="2022-10-27T12:39:49.000Z">
+<meta property="article:modified_time" content="2022-10-27T13:57:20.486Z">
 <meta property="article:author" content="Collin">
 <meta name="twitter:card" content="summary">
   
@@ -162,39 +162,223 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-初学习快速幂" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-第二周题单题解" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      初学习快速幂
+      第二周题单题解
     </h1>
   
 
         
-        <a href="/2021/11/01/%E5%88%9D%E5%AD%A6%E4%B9%A0%E5%BF%AB%E9%80%9F%E5%B9%82/" class="archive-article-date">
-  	<time datetime="2021-11-01T15:15:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-01</time>
+        <a href="/2022/10/27/%E7%AC%AC%E4%BA%8C%E5%91%A8%E9%A2%98%E5%8D%95%E9%A2%98%E8%A7%A3/" class="archive-article-date">
+  	<time datetime="2022-10-27T12:39:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-27</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="快速幂的几个模板"><a href="#快速幂的几个模板" class="headerlink" title="快速幂的几个模板"></a>快速幂的几个模板</h1><span id="more"></span>
-<h2 id="一"><a href="#一" class="headerlink" title="一"></a>一</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">long long fastPower(long long base, long long power) &#123;</span><br><span class="line">    long long result = 1;</span><br><span class="line">    while (power &gt; 0) &#123;</span><br><span class="line">        if (power % 2 == 0) &#123;</span><br><span class="line">            //如果指数为偶数</span><br><span class="line">            power = power / 2;//把指数缩小为一半</span><br><span class="line">            base = base * base % 1000;//底数变大成原来的平方</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            //如果指数为奇数</span><br><span class="line">            power = power - 1;//把指数减去1，使其变成一个偶数</span><br><span class="line">            result = result * base % 1000;//此时记得要把指数为奇数时分离出来的底数的一次方收集好</span><br><span class="line">            power = power / 2;//此时指数为偶数，可以继续执行操作</span><br><span class="line">            base = base * base % 1000;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<hr>
-<h2 id="二"><a href="#二" class="headerlink" title="二"></a>二</h2><p>对上面代码进行再压缩</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">long long fastPower(long long base, long long power) &#123;</span><br><span class="line">    long long result = 1;</span><br><span class="line">    while (power &gt; 0) &#123;</span><br><span class="line">        if (power % 2 == 1) &#123;</span><br><span class="line">            result = result * base % 1000;</span><br><span class="line">        &#125;</span><br><span class="line">        power = power / 2;</span><br><span class="line">        base = (base * base) % 1000;</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="GDUFE2022-ACM-第二周题单"><a href="#GDUFE2022-ACM-第二周题单" class="headerlink" title="GDUFE2022_ACM 第二周题单"></a>GDUFE2022_ACM 第二周题单</h1><h2 id="A-加工生产调度"><a href="#A-加工生产调度" class="headerlink" title="A - 加工生产调度 "></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/522371#problem/A">A - 加工生产调度 </a></h2><h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>中文题面且不长，这个应该不用解释了吧</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>这道题是一道贪心题，由题意每个产品都先进入A车间加工后进入B车间加工，那么容易得出A机器将会不停地进行作业，但B机器在加工过程中有可能要等待A机器。我们注意到两个关键的时间点：第一个部件在A机器上加工时，B机器必须等待；最后一个部件在B机器上加工时，A机器也必须等待B机器的完工。  </p>
+<p>由上可以猜测结论：<br>A机器上加工时间最短的部件最先加工，这样使得B机器能在最短的空闲时间内开始加工；把在B机器上加工时间最短的部件放在最后加工，这样使得A机器用最短时间等待B机器完工。<br>（是不是在想这也没有证明出来啊？这就涉及到技巧问题了，在ACM竞赛中经常有贪心的题目可以大胆猜测结论，并列举多点样例进行验证，不用严格证明，甚至有些题目能利用样例的规律推到公式结论得出答案） </p>
+<p>严格证明可看<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_38083668/article/details/82049889">【结论】加工生产调度</a>  </p>
+<h3 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h3><pre><code class="c,cpp">#include&lt;bits/stdc++.h&gt;
+#define int long long
+using namespace std;
 
-<hr>
-<hr>
-<h2 id="最终优化"><a href="#最终优化" class="headerlink" title="最终优化"></a>最终优化</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">long long fastPower(long long base, long long power) &#123;</span><br><span class="line">    long long result = 1;</span><br><span class="line">    while (power &gt; 0) &#123;</span><br><span class="line">        if (power &amp; 1) &#123;//此处等价于if(power%2==1)</span><br><span class="line">            result = result * base % 1000;</span><br><span class="line">        &#125;</span><br><span class="line">        power &gt;&gt;= 1;//此处等价于power=power/2</span><br><span class="line">        base = (base * base) % 1000;</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+const int N = 1e3 + 10;
+
+int a[N], b[N];
+
+int n;
+
+struct node &#123;
+    int val;
+    int loc;
+&#125;c[N];
+
+vector&lt;node&gt; ans;
+
+bool cmp(node x, node y)
+&#123;
+    return x.val &lt; y.val;
+&#125;
+signed main()
+&#123;
+    cin &gt;&gt; n;
+    for (int i = 1; i &lt;= n; i++)
+        cin &gt;&gt; a[i];
+    for (int i = 1; i &lt;= n; i++)
+    &#123;
+        cin &gt;&gt; b[i];
+        c[i].val = min(a[i], b[i]), c[i].loc = i;
+    &#125;
+    sort(c + 1, c + n + 1, cmp);
+    int be = 0, en = 0;
+    for (int i = 1; i &lt;= n; i++)
+    &#123;
+        if (c[i].val == a[c[i].loc])
+        &#123;
+            ans.insert(ans.begin()+be, c[i]);
+            be++;
+        &#125;
+        else
+        &#123;
+            ans.insert(ans.end() - en, c[i]);
+            en++;
+        &#125;
+    &#125;
+    int tim = 0, tima = 0, timb = 0;
+    for (int i = 0; i &lt; ans.size(); i++)
+    &#123;
+        tim += a[ans[i].loc];
+        if (timb &gt;= a[ans[i].loc])
+        &#123;
+            timb -= a[ans[i].loc];
+        &#125;
+        else
+            timb = 0;
+        timb += b[ans[i].loc];
+            
+    &#125;
+    cout &lt;&lt; tim + timb &lt;&lt; endl;
+    for (int i = 0; i &lt; ans.size(); i++)
+        cout &lt;&lt; ans[i].loc &lt;&lt; &#39; &#39;;
+    return 0;
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">## [B - Score ](https://vjudge.net/contest/522371#problem/B ) </span><br><span class="line">### 题意： </span><br><span class="line">给出一个由O和 X组成的串（长度为1-80），最多有十个串,统计得分。每个O的得分为目前连续出现的O的个数，X 的得分为0。如OOXXOXXOOO得分为1+2+0+0+1+0+0+1+2+3。 </span><br><span class="line"></span><br><span class="line">### 思路:</span><br><span class="line">这题签到题，不用多说</span><br><span class="line"></span><br><span class="line">### 代码：</span><br><span class="line">``` c,cpp </span><br><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">#define int long long</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">const int N = 1e3 + 10;</span><br><span class="line"></span><br><span class="line">int t;</span><br><span class="line">string str;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">signed main()</span><br><span class="line">&#123;</span><br><span class="line">	cin &gt;&gt; t;</span><br><span class="line">	while (t--)</span><br><span class="line">	&#123;</span><br><span class="line">		cin &gt;&gt; str;</span><br><span class="line">		int sum = 0, temp = 0;</span><br><span class="line">		for (int i = 0; i &lt;= str.size(); i++)</span><br><span class="line">		&#123;</span><br><span class="line">			if (str[i] == &#x27;O&#x27;)</span><br><span class="line">				temp++;</span><br><span class="line">			else</span><br><span class="line">				temp = 0;</span><br><span class="line">			sum += temp;</span><br><span class="line">		&#125;</span><br><span class="line">		cout &lt;&lt; sum &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+## [C - Molar mass  ](https://vjudge.net/contest/522371#problem/C ) 
+
+### 题意：
+给出分子式算其摩尔质量（没记错的话是叫这个吧）
+
+（另外注意遇到这些题目很长的英文题目，可以跳着看，先看看样例啥的，因为前面可能会挺多情景的，像这题看样例就很直观的明白题意了）
+
+### 思路：
+水题，无需多言
+
+### 代码：
+``` c,cpp
+#include&lt;bits/stdc++.h&gt;
+#define int long long
+using namespace std;
+
+int t;
+string str;
+
+map&lt;char, double&gt; mp;
+
+
+signed main()
+&#123;
+    mp[&#39;C&#39;] = 12.01; mp[&#39;H&#39;] = 1.008; mp[&#39;O&#39;] = 16.00; mp[&#39;N&#39;] = 14.01;
+    cin &gt;&gt; t;
+    while (t--)
+    &#123;
+        double sum = 0, cnt = 0, tmp = 0;
+        cin &gt;&gt; str;
+        for (int i = 0; i &lt; str.size(); i++)
+        &#123;
+            if (mp[str[i]])
+            &#123;
+                if (cnt == 0)
+                    sum += tmp;
+                else
+                    sum += tmp * cnt;
+                tmp = mp[str[i]];
+                cnt = 0;
+            &#125;
+            else
+                cnt = (cnt * 10 + (str[i] - &#39;0&#39;));
+        &#125;
+        if (cnt == 0)
+            sum += tmp;
+        else
+            sum += tmp * cnt;
+        printf(&quot;%.3f\n&quot;,sum);
+    &#125;
+    return 0;
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## [D - 种树 ](https://vjudge.net/contest/522371#problem/D ) </span><br><span class="line"></span><br><span class="line">### 题意：</span><br><span class="line">满足n个区间种树的要求，求最少种多少棵数</span><br><span class="line"></span><br><span class="line">### 思路（贪心）：</span><br><span class="line">1. 先按结束位置从小到大排序  </span><br><span class="line">2. 对每个区间依次处理</span><br><span class="line">   * 从前到后扫描这个区间，统计已选点的个数 </span><br><span class="line">   * 若已选点的个数超过了要求的点数，则continue</span><br><span class="line">   * 否则从该区间由后向前扫描，添加缺少的覆盖点</span><br><span class="line">### 代码：</span><br><span class="line">``` c,cpp</span><br><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">#define int long long</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">const int N = 3e4 + 10;</span><br><span class="line"></span><br><span class="line">struct node &#123;</span><br><span class="line">	int b;</span><br><span class="line">	int e;</span><br><span class="line">	int t;</span><br><span class="line">&#125;add[N];</span><br><span class="line"></span><br><span class="line">int n, h,ans=0;</span><br><span class="line"></span><br><span class="line">int book[N];//标记当前段有无种树</span><br><span class="line"></span><br><span class="line">bool cmp(node x, node y)</span><br><span class="line">&#123;</span><br><span class="line">	if(x.e!=y.e)</span><br><span class="line">		return x.e &lt; y.e;</span><br><span class="line">	return x.b &lt; y.b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">signed main()</span><br><span class="line">&#123;</span><br><span class="line">	cin &gt;&gt; n &gt;&gt; h;</span><br><span class="line">	for (int i = 1; i &lt;= h; i++)</span><br><span class="line">		cin &gt;&gt; add[i].b &gt;&gt; add[i].e &gt;&gt; add[i].t;</span><br><span class="line">	sort(add + 1, add + h + 1, cmp);</span><br><span class="line">	for (int i = 1; i &lt;= h; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		int cnt = 0,flag=0;</span><br><span class="line">		for (int j = add[i].b; j &lt;= add[i].e; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			if (book[j])</span><br><span class="line">				cnt++;</span><br><span class="line">			if (cnt &gt;= add[i].t)</span><br><span class="line">			&#123;</span><br><span class="line">				flag = 1;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if (flag == 1)</span><br><span class="line">			continue;</span><br><span class="line">		for (int j = add[i].e; j &gt;= add[i].b; j--)</span><br><span class="line">		&#123;</span><br><span class="line">			if (!book[j])</span><br><span class="line">			&#123;</span><br><span class="line">				book[j] = 1;</span><br><span class="line">				ans++;</span><br><span class="line">				cnt++;</span><br><span class="line">			&#125;</span><br><span class="line">			if (cnt &gt;= add[i].t)</span><br><span class="line">				break;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+ 
 
 
 
+
+
+
+
+
+
+
+
+## [E - 喷水装置 ](https://vjudge.net/contest/522371#problem/E ) 
+
+### 题意：
+![](D:\blog\collinblog\source\微信图片_20221027215221.png)
+
+### 思路：
+
+### 代码：
+``` c,cpp
+#include&lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int N = 25000 + 5;
+
+struct node &#123;
+    double l;
+    double r;
+&#125;a[N];
+
+int t, n, w, l, loc, r;
+
+bool cmp(node x, node y)&#123;return x.l &lt; y.l;&#125;
+
+signed main()
+&#123;
+    cin &gt;&gt; t;
+    while (t--)
+    &#123;
+        cin &gt;&gt; n &gt;&gt; l &gt;&gt; w;
+        int len=0,ans=0;
+        double dis;
+        for (int i = 1; i &lt;= n; i++)
+        &#123;
+            cin &gt;&gt; loc &gt;&gt; r;
+            if (r &lt;= w/2)
+                continue;
+            dis = sqrt(r * r*1.0 - (1.0*w * w / 4));
+            a[++len].l = loc - dis; a[len].r = loc + dis;
+        &#125;
+        sort(a + 1, a + len + 1, cmp);
+        double tmp = 0;
+        int flag = 0;
+        while (tmp &lt; l)
+        &#123;
+            ans++;
+            double x = tmp;
+            for (int i = 1; a[i].l &lt;= x &amp;&amp; i &lt;= len; i++)
+                if (tmp &lt; a[i].r)
+                    tmp = a[i].r;
+            if (tmp == x &amp;&amp; x &lt; l)
+            &#123;
+                flag = 1;
+                cout &lt;&lt; -1 &lt;&lt; endl;
+                break;
+            &#125;
+        &#125;
+        if (!flag)
+            cout &lt;&lt; ans &lt;&lt; endl;
+    &#125;
+    return 0;
+&#125;
+</code></pre>
 
       
 
@@ -274,7 +458,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://collin033.github.io/2021/11/01/%E5%88%9D%E5%AD%A6%E4%B9%A0%E5%BF%AB%E9%80%9F%E5%B9%82/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://collin033.github.io/2022/10/27/%E7%AC%AC%E4%BA%8C%E5%91%A8%E9%A2%98%E5%8D%95%E9%A2%98%E8%A7%A3/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -286,25 +470,6 @@
 </article>
 
   
-<nav id="article-nav">
-  
-    <a href="/2021/11/06/%E4%BB%A5%E7%AC%AC%E4%B8%89%E5%91%A8%E5%91%A8%E8%B5%9BH%E9%A2%98%E6%B5%85%E8%B0%8801%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          以第三周周赛H题浅谈01背包问题
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2021/10/31/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">我的第一篇博客文章</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -326,7 +491,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%B9%82%E7%9A%84%E5%87%A0%E4%B8%AA%E6%A8%A1%E6%9D%BF"><span class="toc-number">1.</span> <span class="toc-text">快速幂的几个模板</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80"><span class="toc-number">1.1.</span> <span class="toc-text">一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C"><span class="toc-number">1.2.</span> <span class="toc-text">二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E4%BC%98%E5%8C%96"><span class="toc-number">1.3.</span> <span class="toc-text">最终优化</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#GDUFE2022-ACM-%E7%AC%AC%E4%BA%8C%E5%91%A8%E9%A2%98%E5%8D%95"><span class="toc-number">1.</span> <span class="toc-text">GDUFE2022_ACM 第二周题单</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#A-%E5%8A%A0%E5%B7%A5%E7%94%9F%E4%BA%A7%E8%B0%83%E5%BA%A6"><span class="toc-number">1.1.</span> <span class="toc-text">A - 加工生产调度 </span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F"><span class="toc-number">1.1.1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">1.1.2.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="toc-number">1.1.3.</span> <span class="toc-text">代码：</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -340,7 +505,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="初学习快速幂" data-title="初学习快速幂" data-url="https://Collin033.github.io/2021/11/01/%E5%88%9D%E5%AD%A6%E4%B9%A0%E5%BF%AB%E9%80%9F%E5%B9%82/"></div>
+	<div class="ds-thread" data-thread-key="第二周题单题解" data-title="第二周题单题解" data-url="https://Collin033.github.io/2022/10/27/%E7%AC%AC%E4%BA%8C%E5%91%A8%E9%A2%98%E5%8D%95%E9%A2%98%E8%A7%A3/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -362,7 +527,7 @@
   
 
   
-  <div id="SOHUCS" sid="初学习快速幂" ></div> 
+  <div id="SOHUCS" sid="第二周题单题解" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
@@ -469,10 +634,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
             
             <div class="clearfix"></div>
           </ul>
