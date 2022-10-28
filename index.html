@@ -180,9 +180,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <details>
-  <summary>点击展开</summary>   
-      
+        <details>  
+<summary>点击展开</summary>    
+       
 <h1 id="GDUFE2022-ACM-第二周题单"><a href="#GDUFE2022-ACM-第二周题单" class="headerlink" title="GDUFE2022_ACM 第二周题单"></a>GDUFE2022_ACM 第二周题单</h1><h2 id="A-加工生产调度"><a href="#A-加工生产调度" class="headerlink" title="A - 加工生产调度 "></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/522371#problem/A">A - 加工生产调度 </a></h2><h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>中文题面且不长，这个应该不用解释了吧</p>
 <h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>这道题是一道贪心题，由题意每个产品都先进入A车间加工后进入B车间加工，那么容易得出A机器将会不停地进行作业，但B机器在加工过程中有可能要等待A机器。我们注意到两个关键的时间点：第一个部件在A机器上加工时，B机器必须等待；最后一个部件在B机器上加工时，A机器也必须等待B机器的完工。  </p>
 <p>由上可以猜测结论：<br>A机器上加工时间最短的部件最先加工，这样使得B机器能在最短的空闲时间内开始加工；把在B机器上加工时间最短的部件放在最后加工，这样使得A机器用最短时间等待B机器完工。<br>（是不是在想这也没有证明出来啊？这就涉及到技巧问题了，在ACM竞赛中经常有贪心的题目可以大胆猜测结论，并列举多点样例进行验证，不用严格证明，甚至有些题目能利用样例的规律推到公式结论得出答案） </p>
@@ -493,42 +493,37 @@ int main() &#123;
 <h2 id="G-Throwing-cards-away-I"><a href="#G-Throwing-cards-away-I" class="headerlink" title="G - Throwing cards away I "></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/522371#problem/G">G - Throwing cards away I </a></h2><h3 id="题意：-5"><a href="#题意：-5" class="headerlink" title="题意："></a>题意：</h3><p>给n张牌放成一叠，从上到下编号从1~n，当至少还有两张牌时，丢弃最上面的牌，第二张牌放到最下面，重复这个过程直到只剩下一张牌，输出丢弃牌的序列以及最后剩下的牌。    </p>
 <h3 id="思路：-3"><a href="#思路：-3" class="headerlink" title="思路："></a>思路：</h3><p>水题啦，直接模拟队列就能解决了</p>
 <h3 id="代码：-6"><a href="#代码：-6" class="headerlink" title="代码："></a>代码：</h3><p>懒得写了，直接copy一份通过的代码过来了 </p>
-<pre><code class="c,cpp">#include&lt;string&gt;
-#include&lt;stdio.h&gt;
-#include&lt;queue&gt;
-#include&lt;string&gt;
-#include&lt;iostream&gt;
+<pre><code class="c,cpp">#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;cstdlib&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdio&gt;
+#include &lt;cmath&gt;
+ 
 using namespace std;
-#define MAXN 51
-
-int main() &#123;
+ 
+int Q[10000];
+ 
+int main()
+&#123;
     int n;
-    int ctn;
-    while (cin&gt;&gt;n&amp;&amp; n != 0) &#123;
-        queue&lt;int&gt; q;
-        for (int i = 1; i &lt;= n; i++) &#123;
-            q.push(i);
+    while (cin &gt;&gt; n &amp;&amp; n) &#123;
+        for (int i = 0; i &lt;= n; ++ i)
+            Q[i] = i;
+        int head = 1,tail = n,first = 1;
+        printf(&quot;Discarded cards:&quot;);
+        while (head &lt; tail) &#123;
+            if (!first) printf(&quot;,&quot;);
+            printf(&quot; %d&quot;,Q[head ++]);
+            Q[++ tail] = Q[head ++];
+            first = 0;
         &#125;
-        cout &lt;&lt; &quot;Discarded cards:&quot;;
-        while (q.size() &gt; 1) &#123;
-            cout &lt;&lt; q.front();
-            if (q.size() &gt; 2) &#123;
-                cout &lt;&lt; &quot;,&quot;;
-            &#125;
-            q.pop();
-            q.push(q.front());
-            q.pop();
-            
-
-        &#125;
-        cout &lt;&lt; endl;
-        cout &lt;&lt; &quot;Remaining card:&quot;&lt;&lt;q.front() &lt;&lt; endl;
+        printf(&quot;\nRemaining card: %d\n&quot;,Q[head]);
     &#125;
-    
+    return 0;
+&#125;     
 
-
-&#125;
-
+     
 </code></pre>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>好像写着写着发现几乎都是水题，为什么群里都在说难？顶多只是题目看上去有点吓人而已吧。 </p>
 </details>
