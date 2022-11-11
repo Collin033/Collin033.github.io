@@ -16,7 +16,7 @@
 <meta property="og:description" content="GDUFE2022_ACM 第四周题单">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-11-11T10:34:01.000Z">
-<meta property="article:modified_time" content="2022-11-11T12:11:46.249Z">
+<meta property="article:modified_time" content="2022-11-11T12:19:37.533Z">
 <meta property="article:author" content="Collin">
 <meta name="twitter:card" content="summary">
   
@@ -321,134 +321,160 @@ int main()
 <li>装满A  </li>
 <li>装满B </li>
 <li>将A中液体倒入B  </li>
-<li>将B中液体倒入A;<br>按照bfs的方法做就行了  <h3 id="代码：-2"><a href="#代码：-2" class="headerlink" title="代码："></a>代码：</h3>``` c,cpp<br>#include&lt;bits/stdc++.h&gt;<br>using namespace std;</li>
+<li>将B中液体倒入A;<br>按照bfs的方法做就行了  <h3 id="代码：-2"><a href="#代码：-2" class="headerlink" title="代码："></a>代码：</h3></li>
 </ol>
-<p>bool take[102][102], ok;<br>int A, B, C;<br>struct node {<br>    string str;<br>    int l, r, pla[102], cnt; // cnt 记录有多少条路径<br>};<br>queue<node> que;<br>string str[] = {<br>    “FILL(1)”,<br>    “FILL(2)”,<br>    “POUR(1,2)”,<br>    “POUR(2,1)”,<br>    “DROP(1)”,<br>    “DROP(2)”<br>};//用于输出过程</p>
-<p>void show(int len, int pla[]) {<br>    printf(“%d\n”, len);<br>    for (int i = 1; i &lt;= len; i++) {<br>        cout &lt;&lt; str[pla[i]] &lt;&lt; endl;<br>    }<br>}</p>
-<p>void bfs() {<br>    ok = false;<br>    take[0][0] = true;<br>    node a;<br>    a.str = “NONE”;<br>    a.l = a.r = a.cnt = 0;<br>    que.push(a);</p>
-<pre><code>while (!que.empty()) &#123;
-    node next, now = que.front(); que.pop();
-    if (now.l == C || now.r == C) &#123;
-        show(now.cnt, now.pla);
-        ok = true;
-        break;
+<pre><code class="c,cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+
+bool take[102][102], ok;
+int A, B, C;
+struct node &#123;
+    string str;
+    int l, r, pla[102], cnt; // cnt 记录有多少条路径
+&#125;;
+queue&lt;node&gt; que;
+string str[] = &#123;
+    &quot;FILL(1)&quot;,
+    &quot;FILL(2)&quot;,
+    &quot;POUR(1,2)&quot;,
+    &quot;POUR(2,1)&quot;,
+    &quot;DROP(1)&quot;,
+    &quot;DROP(2)&quot;
+&#125;;//用于输出过程
+
+void show(int len, int pla[]) &#123;
+    printf(&quot;%d\n&quot;, len);
+    for (int i = 1; i &lt;= len; i++) &#123;
+        cout &lt;&lt; str[pla[i]] &lt;&lt; endl;
     &#125;
-
-    if (now.l &lt; A &amp;&amp; !take[A][now.r])// FILL(1)
-    &#123;
-        next.str = str[0];
-        next.l = A;
-        next.r = now.r;
-        for (int i = 1; i &lt;= now.cnt; i++) &#123;
-            next.pla[i] = now.pla[i]; // 这句循环是为了保存之前的路径 下同
-        &#125;
-        next.pla[now.cnt + 1] = 0;
-        next.cnt = now.cnt + 1;
-        take[A][now.r] = true;
-        que.push(next);
-    &#125;
-
-
-    if (now.r &lt; B &amp;&amp; !take[now.l][B]) // FILL(2)
-    &#123;
-        next.str = str[1];
-        next.l = now.l;
-        next.r = B;
-        for (int i = 1; i &lt;= now.cnt; i++) &#123;
-            next.pla[i] = now.pla[i];
-        &#125;
-        next.pla[now.cnt + 1] = 1;
-        next.cnt = now.cnt + 1;
-        take[now.l][B] = true;
-        que.push(next);
-    &#125;
-
-    if (0 &lt; now.l &amp;&amp; now.r &lt; B)// POUR(1, 2)
-    &#123;
-        int R = now.l + now.r &gt;= B ? B : now.l + now.r;
-        int L = R - now.r &gt;= now.l ? 0 : now.l - (R - now.r);
-        if (!take[L][R]) &#123;
-            next.str = str[2];
-            next.l = L;
-            next.r = R;
-            for (int i = 1; i &lt;= now.cnt; i++) &#123;
-                next.pla[i] = now.pla[i];
-            &#125;
-            next.pla[now.cnt + 1] = 2;
-            next.cnt = now.cnt + 1;
-            take[L][R] = true;
-            que.push(next);
-        &#125;
-    &#125;
-
-    if (now.l &lt; A &amp;&amp; 0 &lt; now.r) // POUR(2,1)
-    &#123;
-        int L = now.l + now.r &gt;= A ? A : now.l + now.r;
-        int R = L - now.l &gt;= now.r ? 0 : now.r - (L - now.l);
-        if (!take[L][R]) &#123;
-            next.str = str[3];
-            next.l = L;
-            next.r = R;
-            for (int i = 1; i &lt;= now.cnt; i++) &#123;
-                next.pla[i] = now.pla[i];
-            &#125;
-            next.pla[now.cnt + 1] = 3;
-            next.cnt = now.cnt + 1;
-            take[L][R] = true;
-            que.push(next);
-        &#125;
-    &#125;
-
-    if (!take[0][now.r])// DROP(1)
-    &#123;
-        next.str = str[4];
-        next.l = 0;
-        next.r = now.r;
-        for (int i = 1; i &lt;= now.cnt; i++) &#123;
-            next.pla[i] = now.pla[i];
-        &#125;
-        next.cnt = now.cnt + 1;
-        next.pla[now.cnt + 1] = 4;
-        take[0][now.r] = true;
-        que.push(next);
-    &#125;
-
-    if (!take[now.l][0])// DROP(2)
-    &#123;
-        next.str = str[5];
-        next.l = now.l;
-        next.r = 0;
-        for (int i = 1; i &lt;= now.cnt; i++) &#123;
-            next.pla[i] = now.pla[i];
-        &#125;
-        next.cnt = now.cnt + 1;
-        next.pla[now.cnt + 1] = 5;
-        take[now.l][0] = true;
-        que.push(next);
-    &#125;
-
 &#125;
 
-if (!ok) printf(&quot;impossible\n&quot;);
-</code></pre>
-<p>}</p>
-<p>int main()<br>{<br>    scanf(“%d %d %d”, &amp;A, &amp;B, &amp;C);</p>
-<pre><code>bfs();
+void bfs() &#123;
+    ok = false;
+    take[0][0] = true;
+    node a;
+    a.str = &quot;NONE&quot;;
+    a.l = a.r = a.cnt = 0;
+    que.push(a);
 
-return 0;
-</code></pre>
-<p>}</p>
-<pre><code>## [E - Ignatius and the Princess IV](https://vjudge.net/contest/527603#problem/E)  
-### 题意： 
-给你n个数字，你需要找出出现至少(n+1)/2次的数字    
- 
-### 题解：
+    while (!que.empty()) &#123;
+        node next, now = que.front(); que.pop();
+        if (now.l == C || now.r == C) &#123;
+            show(now.cnt, now.pla);
+            ok = true;
+            break;
+        &#125;
 
-#### 方法一： 
-首先看到这个数字出现次数至少（n+1)/2，所以该数出现的次数一定大于一半，所以这是一堆数字比谁最多，我们直接每次只拿当前的数和前面的所有数里出现次数最多的数比较
-### 代码：   
-``` c,cpp  
-#include&lt;bits/stdc++.h&gt;
+        if (now.l &lt; A &amp;&amp; !take[A][now.r])// FILL(1)
+        &#123;
+            next.str = str[0];
+            next.l = A;
+            next.r = now.r;
+            for (int i = 1; i &lt;= now.cnt; i++) &#123;
+                next.pla[i] = now.pla[i]; // 这句循环是为了保存之前的路径 下同
+            &#125;
+            next.pla[now.cnt + 1] = 0;
+            next.cnt = now.cnt + 1;
+            take[A][now.r] = true;
+            que.push(next);
+        &#125;
+
+
+        if (now.r &lt; B &amp;&amp; !take[now.l][B]) // FILL(2)
+        &#123;
+            next.str = str[1];
+            next.l = now.l;
+            next.r = B;
+            for (int i = 1; i &lt;= now.cnt; i++) &#123;
+                next.pla[i] = now.pla[i];
+            &#125;
+            next.pla[now.cnt + 1] = 1;
+            next.cnt = now.cnt + 1;
+            take[now.l][B] = true;
+            que.push(next);
+        &#125;
+
+        if (0 &lt; now.l &amp;&amp; now.r &lt; B)// POUR(1, 2)
+        &#123;
+            int R = now.l + now.r &gt;= B ? B : now.l + now.r;
+            int L = R - now.r &gt;= now.l ? 0 : now.l - (R - now.r);
+            if (!take[L][R]) &#123;
+                next.str = str[2];
+                next.l = L;
+                next.r = R;
+                for (int i = 1; i &lt;= now.cnt; i++) &#123;
+                    next.pla[i] = now.pla[i];
+                &#125;
+                next.pla[now.cnt + 1] = 2;
+                next.cnt = now.cnt + 1;
+                take[L][R] = true;
+                que.push(next);
+            &#125;
+        &#125;
+
+        if (now.l &lt; A &amp;&amp; 0 &lt; now.r) // POUR(2,1)
+        &#123;
+            int L = now.l + now.r &gt;= A ? A : now.l + now.r;
+            int R = L - now.l &gt;= now.r ? 0 : now.r - (L - now.l);
+            if (!take[L][R]) &#123;
+                next.str = str[3];
+                next.l = L;
+                next.r = R;
+                for (int i = 1; i &lt;= now.cnt; i++) &#123;
+                    next.pla[i] = now.pla[i];
+                &#125;
+                next.pla[now.cnt + 1] = 3;
+                next.cnt = now.cnt + 1;
+                take[L][R] = true;
+                que.push(next);
+            &#125;
+        &#125;
+
+        if (!take[0][now.r])// DROP(1)
+        &#123;
+            next.str = str[4];
+            next.l = 0;
+            next.r = now.r;
+            for (int i = 1; i &lt;= now.cnt; i++) &#123;
+                next.pla[i] = now.pla[i];
+            &#125;
+            next.cnt = now.cnt + 1;
+            next.pla[now.cnt + 1] = 4;
+            take[0][now.r] = true;
+            que.push(next);
+        &#125;
+
+        if (!take[now.l][0])// DROP(2)
+        &#123;
+            next.str = str[5];
+            next.l = now.l;
+            next.r = 0;
+            for (int i = 1; i &lt;= now.cnt; i++) &#123;
+                next.pla[i] = now.pla[i];
+            &#125;
+            next.cnt = now.cnt + 1;
+            next.pla[now.cnt + 1] = 5;
+            take[now.l][0] = true;
+            que.push(next);
+        &#125;
+
+    &#125;
+
+    if (!ok) printf(&quot;impossible\n&quot;);
+&#125;
+
+int main()
+&#123;
+    scanf(&quot;%d %d %d&quot;, &amp;A, &amp;B, &amp;C);
+
+    bfs();
+
+    return 0;
+&#125;
+</code></pre>
+<h2 id="E-Ignatius-and-the-Princess-IV"><a href="#E-Ignatius-and-the-Princess-IV" class="headerlink" title="E - Ignatius and the Princess IV"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/527603#problem/E">E - Ignatius and the Princess IV</a></h2><h3 id="题意：-3"><a href="#题意：-3" class="headerlink" title="题意："></a>题意：</h3><p>给你n个数字，你需要找出出现至少(n+1)/2次的数字    </p>
+<h3 id="题解：-3"><a href="#题解：-3" class="headerlink" title="题解："></a>题解：</h3><h4 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h4><p>首先看到这个数字出现次数至少（n+1)/2，所以该数出现的次数一定大于一半，所以这是一堆数字比谁最多，我们直接每次只拿当前的数和前面的所有数里出现次数最多的数比较</p>
+<h3 id="代码：-3"><a href="#代码：-3" class="headerlink" title="代码："></a>代码：</h3><pre><code class="c,cpp">#include&lt;bits/stdc++.h&gt;
 using namespace std;
 int main()
 &#123;
@@ -478,9 +504,9 @@ int main()
 &#125;
 </code></pre>
 <h4 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h4><p>数组存起来，sort一下，最中间的就是，这个就不放代码了</p>
-<h2 id="F-免费馅饼"><a href="#F-免费馅饼" class="headerlink" title="F - 免费馅饼"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/527603#problem/F">F - 免费馅饼</a></h2><h3 id="题意：-3"><a href="#题意：-3" class="headerlink" title="题意："></a>题意：</h3><p>自己看中文</p>
-<h3 id="题解：-3"><a href="#题解：-3" class="headerlink" title="题解："></a>题解：</h3><p>我们反向考虑从[0，10]之内的某个位置在最后一秒开始收集，让时间倒流，最后当时间为0你在初始位置5时的最大数目，跟题目是等价的。从最后一秒开始考虑，每次这一秒的状态确定意味着前一秒的状态也已经确定，所以从下向上进行dp<br>如果我们初始化dp[t][pos]是第t秒pos位置的馅饼数量，那么我们有状态转移方程：<br>dp[t][pos] += max(dp[t + 1][pos], dp[t + 1][pos -1], dp[t + 1][pos+ 1])</p>
-<h3 id="代码：-3"><a href="#代码：-3" class="headerlink" title="代码："></a>代码：</h3><pre><code class="c,cpp">#include &lt;bits/stdc++.h&gt;
+<h2 id="F-免费馅饼"><a href="#F-免费馅饼" class="headerlink" title="F - 免费馅饼"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/527603#problem/F">F - 免费馅饼</a></h2><h3 id="题意：-4"><a href="#题意：-4" class="headerlink" title="题意："></a>题意：</h3><p>自己看中文</p>
+<h3 id="题解：-4"><a href="#题解：-4" class="headerlink" title="题解："></a>题解：</h3><p>我们反向考虑从[0，10]之内的某个位置在最后一秒开始收集，让时间倒流，最后当时间为0你在初始位置5时的最大数目，跟题目是等价的。从最后一秒开始考虑，每次这一秒的状态确定意味着前一秒的状态也已经确定，所以从下向上进行dp<br>如果我们初始化dp[t][pos]是第t秒pos位置的馅饼数量，那么我们有状态转移方程：<br>dp[t][pos] += max(dp[t + 1][pos], dp[t + 1][pos -1], dp[t + 1][pos+ 1])</p>
+<h3 id="代码：-4"><a href="#代码：-4" class="headerlink" title="代码："></a>代码：</h3><pre><code class="c,cpp">#include &lt;bits/stdc++.h&gt;
 using namespace std;
 
 const int maxn = 10 + 5;
@@ -518,14 +544,14 @@ int main()
     return 0;
 &#125;
 </code></pre>
-<h2 id="G-Pie"><a href="#G-Pie" class="headerlink" title="G - Pie"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/527603#problem/G">G - Pie</a></h2><h3 id="题意：-4"><a href="#题意：-4" class="headerlink" title="题意："></a>题意：</h3><p>主人过生日，F个人来给他庆生，但是只有N个Pizza，现在要将N个Pizza分给F+1个人（包括主人自己），问每个人能分到Pizza的最大体积是多少，要求每个人所分的Pizza只能是从一个Pizza上切下来的，不可以用好多小块拼凑成体积相同的Pizza。（精确到小数点后四位）</p>
-<h3 id="题解：-4"><a href="#题解：-4" class="headerlink" title="题解："></a>题解：</h3><p>利用二分查找的方法解决该问题。  </p>
+<h2 id="G-Pie"><a href="#G-Pie" class="headerlink" title="G - Pie"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/527603#problem/G">G - Pie</a></h2><h3 id="题意：-5"><a href="#题意：-5" class="headerlink" title="题意："></a>题意：</h3><p>主人过生日，F个人来给他庆生，但是只有N个Pizza，现在要将N个Pizza分给F+1个人（包括主人自己），问每个人能分到Pizza的最大体积是多少，要求每个人所分的Pizza只能是从一个Pizza上切下来的，不可以用好多小块拼凑成体积相同的Pizza。（精确到小数点后四位）</p>
+<h3 id="题解：-5"><a href="#题解：-5" class="headerlink" title="题解："></a>题解：</h3><p>利用二分查找的方法解决该问题。  </p>
 <ol>
 <li>首先找到所有Pizza中面积最大的Pizza（因为所有pizza的高度都是1，所以找最大体积的问题降维成找最大面积的问题）。</li>
 <li>取最大面积的一半，作为每个人均摊pizza的面积，然后记录每个pizza按照该面积能够切分多少块，最终求和。</li>
 <li>将第二步计算的结果与人数F+1对比，如果比人数多，每个人有可能再多分一些；如果比人数少，证明每个人还要在少分一些</li>
 </ol>
-<h3 id="代码：-4"><a href="#代码：-4" class="headerlink" title="代码："></a>代码：</h3><pre><code class="c,cpp">#include &lt;iostream&gt;
+<h3 id="代码：-5"><a href="#代码：-5" class="headerlink" title="代码："></a>代码：</h3><pre><code class="c,cpp">#include &lt;iostream&gt;
 #include &lt;math.h&gt;
 using namespace std;
 const double PI = acos(-1.0);//注意π的精度
@@ -573,8 +599,8 @@ int main()
    return 0;
 &#125;
 </code></pre>
-<h2 id="I-Color-the-ball"><a href="#I-Color-the-ball" class="headerlink" title="I - Color the ball"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/527603#problem/I">I - Color the ball</a></h2><h3 id="题意：中文自己看"><a href="#题意：中文自己看" class="headerlink" title="题意：中文自己看"></a>题意：中文自己看</h3><h3 id="题解：-5"><a href="#题解：-5" class="headerlink" title="题解："></a>题解：</h3><p>将指定序列的区间[l,r]内的每个元素加d，其差分序列B的变化即为即为B[l]+d，B[r+1]-d,其余位置保持不变。下面给出证明：<br>设序列A有N个元素，在给定区间进行区间染色操作，染色深度为d(d&gt;0)；<br>设序列B为A的差分序列，则差分序列B为:B[1]=A[1],B[i]=A[i]-A[i-1](2 $\leq i \leq n$)；<br>所以$\sum_{i=1}^{n}{B[j]  (i&gt;=1) }$<br>当对于某段存在的区间[l,r]，使后B[l]+d，由 可知A序列自元素l开始每个元素增加d单位；同理，在B[r+1]-d后，A序列自r+1开始恢复正常，不再增加d单位。<br>那么对于本题目，我们只需要构造好B数组，然后利用差分的逆运算前缀和累加得出区间内每个点的染色次数即可。</p>
-<h3 id="代码：-5"><a href="#代码：-5" class="headerlink" title="代码："></a>代码：</h3><pre><code class="c,cpp">#include &lt;bits/stdc++.h&gt;
+<h2 id="I-Color-the-ball"><a href="#I-Color-the-ball" class="headerlink" title="I - Color the ball"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/527603#problem/I">I - Color the ball</a></h2><h3 id="题意：中文自己看"><a href="#题意：中文自己看" class="headerlink" title="题意：中文自己看"></a>题意：中文自己看</h3><h3 id="题解：-6"><a href="#题解：-6" class="headerlink" title="题解："></a>题解：</h3><p>将指定序列的区间[l,r]内的每个元素加d，其差分序列B的变化即为即为B[l]+d，B[r+1]-d,其余位置保持不变。下面给出证明：<br>设序列A有N个元素，在给定区间进行区间染色操作，染色深度为d(d&gt;0)；<br>设序列B为A的差分序列，则差分序列B为:B[1]=A[1],B[i]=A[i]-A[i-1](2 $\leq i \leq n$)；<br>所以  $\sum_{i=1}^{n}{B[j]  (i&gt;=1) }$<br>当对于某段存在的区间[l,r]，使后B[l]+d，由 可知A序列自元素l开始每个元素增加d单位；同理，在B[r+1]-d后，A序列自r+1开始恢复正常，不再增加d单位。<br>那么对于本题目，我们只需要构造好B数组，然后利用差分的逆运算前缀和累加得出区间内每个点的染色次数即可。</p>
+<h3 id="代码：-6"><a href="#代码：-6" class="headerlink" title="代码："></a>代码：</h3><pre><code class="c,cpp">#include &lt;bits/stdc++.h&gt;
 using namespace std;
 const int N = 1e5 + 10;
 int ball[N], n;
@@ -599,9 +625,9 @@ ball[b + 1]--;
    return 0;
 &#125;
 </code></pre>
-<h2 id="J-Master-of-GCD"><a href="#J-Master-of-GCD" class="headerlink" title="J - Master of GCD"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/527603#problem/J">J - Master of GCD</a></h2><h3 id="题意：-5"><a href="#题意：-5" class="headerlink" title="题意："></a>题意：</h3><p>t组输入，输入两个数n，m，分别代表数组长度，初始化数组的全部值都为1，对数组进行m次操作，每次选定一个范围,l,r,后面跟着2或3表示对[l，r]范围内的数全都乘上2或三，问这个数组的最大公约数</p>
-<h3 id="题解：-6"><a href="#题解：-6" class="headerlink" title="题解："></a>题解：</h3><p>这个最大公约数一定最后乘上的2是最少的，3也是最少的，所以我们可以用一维差分，我们开两个数组第一个表示对乘以二的数的差分，第二个表示对乘以三的差分，分别统计一下两个数组中的最小数的幂相乘就是答案，具体看代码</p>
-<h3 id="代码：-6"><a href="#代码：-6" class="headerlink" title="代码："></a>代码：</h3><pre><code class="c,cpp">#include&lt;iostream&gt;
+<h2 id="J-Master-of-GCD"><a href="#J-Master-of-GCD" class="headerlink" title="J - Master of GCD"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/527603#problem/J">J - Master of GCD</a></h2><h3 id="题意：-6"><a href="#题意：-6" class="headerlink" title="题意："></a>题意：</h3><p>t组输入，输入两个数n，m，分别代表数组长度，初始化数组的全部值都为1，对数组进行m次操作，每次选定一个范围,l,r,后面跟着2或3表示对[l，r]范围内的数全都乘上2或三，问这个数组的最大公约数</p>
+<h3 id="题解：-7"><a href="#题解：-7" class="headerlink" title="题解："></a>题解：</h3><p>这个最大公约数一定最后乘上的2是最少的，3也是最少的，所以我们可以用一维差分，我们开两个数组第一个表示对乘以二的数的差分，第二个表示对乘以三的差分，分别统计一下两个数组中的最小数的幂相乘就是答案，具体看代码</p>
+<h3 id="代码：-7"><a href="#代码：-7" class="headerlink" title="代码："></a>代码：</h3><pre><code class="c,cpp">#include&lt;iostream&gt;
 #include&lt;algorithm&gt;
 #include&lt;cstring&gt;
 #include&lt;bits/stdc++.h&gt;
@@ -657,9 +683,9 @@ int main()
    &#125;
 &#125;
 </code></pre>
-<h2 id="K-Monthly-Expense"><a href="#K-Monthly-Expense" class="headerlink" title="K - Monthly Expense"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/527603#problem/K">K - Monthly Expense</a></h2><h3 id="题意：-6"><a href="#题意：-6" class="headerlink" title="题意："></a>题意：</h3><p>给你一个长度为N的序列，现在要让你把他们切割成M份（每一份都是连续的），然后每一份都有一个和sum[i]，其中最大的一个是maxSum = max(sum[i]),问这个最大值最小是多少？</p>
-<h3 id="题解：-7"><a href="#题解：-7" class="headerlink" title="题解："></a>题解：</h3><p>注意到所求值最大为109，所以可以用二分来解这道题，输入过程得到n个数的和Sum，n个数中最大值Max，则[Max,Sum]即为二分区间。查找的是第一个&lt;=m的值，所以返回的是l，复杂度为O(nlogn)。</p>
-<h3 id="代码：-7"><a href="#代码：-7" class="headerlink" title="代码："></a>代码：</h3><pre><code class="c,cpp">#include&lt;bits/stdc++.h&gt;
+<h2 id="K-Monthly-Expense"><a href="#K-Monthly-Expense" class="headerlink" title="K - Monthly Expense"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/527603#problem/K">K - Monthly Expense</a></h2><h3 id="题意：-7"><a href="#题意：-7" class="headerlink" title="题意："></a>题意：</h3><p>给你一个长度为N的序列，现在要让你把他们切割成M份（每一份都是连续的），然后每一份都有一个和sum[i]，其中最大的一个是maxSum = max(sum[i]),问这个最大值最小是多少？</p>
+<h3 id="题解：-8"><a href="#题解：-8" class="headerlink" title="题解："></a>题解：</h3><p>注意到所求值最大为109，所以可以用二分来解这道题，输入过程得到n个数的和Sum，n个数中最大值Max，则[Max,Sum]即为二分区间。查找的是第一个&lt;=m的值，所以返回的是l，复杂度为O(nlogn)。</p>
+<h3 id="代码：-8"><a href="#代码：-8" class="headerlink" title="代码："></a>代码：</h3><pre><code class="c,cpp">#include&lt;bits/stdc++.h&gt;
 using namespace std;
 
 int n, m, a[100005], Max, Sum;
@@ -812,7 +838,7 @@ int main() &#123;
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#GDUFE2022-ACM-%E7%AC%AC%E5%9B%9B%E5%91%A8%E9%A2%98%E5%8D%95"><span class="toc-number">1.</span> <span class="toc-text">GDUFE2022_ACM 第四周题单</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#A-%E6%A3%8B%E7%9B%98%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.</span> <span class="toc-text">A - 棋盘问题 </span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%EF%BC%9A"><span class="toc-number">1.1.1.</span> <span class="toc-text">题意：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3%EF%BC%9A"><span class="toc-number">1.1.2.</span> <span class="toc-text">题解：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="toc-number">1.1.3.</span> <span class="toc-text">代码：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B-Dungeon-Master"><span class="toc-number">1.2.</span> <span class="toc-text">B - Dungeon Master </span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%EF%BC%9A-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">题意：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3%EF%BC%9A-1"><span class="toc-number">1.2.2.</span> <span class="toc-text">题解：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A-1"><span class="toc-number">1.2.3.</span> <span class="toc-text">代码：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E2%80%93-Eight"><span class="toc-number">1.3.</span> <span class="toc-text">C – Eight </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#D-%E2%80%93-Pots"><span class="toc-number">1.4.</span> <span class="toc-text">D – Pots </span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%EF%BC%9A-2"><span class="toc-number">1.4.1.</span> <span class="toc-text">题意：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3%EF%BC%9A-2"><span class="toc-number">1.4.2.</span> <span class="toc-text">题解：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A-2"><span class="toc-number">1.4.3.</span> <span class="toc-text">代码：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">方法二：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#F-%E5%85%8D%E8%B4%B9%E9%A6%85%E9%A5%BC"><span class="toc-number">1.5.</span> <span class="toc-text">F - 免费馅饼</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%EF%BC%9A-3"><span class="toc-number">1.5.1.</span> <span class="toc-text">题意：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3%EF%BC%9A-3"><span class="toc-number">1.5.2.</span> <span class="toc-text">题解：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A-3"><span class="toc-number">1.5.3.</span> <span class="toc-text">代码：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#G-Pie"><span class="toc-number">1.6.</span> <span class="toc-text">G - Pie</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%EF%BC%9A-4"><span class="toc-number">1.6.1.</span> <span class="toc-text">题意：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3%EF%BC%9A-4"><span class="toc-number">1.6.2.</span> <span class="toc-text">题解：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A-4"><span class="toc-number">1.6.3.</span> <span class="toc-text">代码：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-Color-the-ball"><span class="toc-number">1.7.</span> <span class="toc-text">I - Color the ball</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%EF%BC%9A%E4%B8%AD%E6%96%87%E8%87%AA%E5%B7%B1%E7%9C%8B"><span class="toc-number">1.7.1.</span> <span class="toc-text">题意：中文自己看</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3%EF%BC%9A-5"><span class="toc-number">1.7.2.</span> <span class="toc-text">题解：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A-5"><span class="toc-number">1.7.3.</span> <span class="toc-text">代码：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#J-Master-of-GCD"><span class="toc-number">1.8.</span> <span class="toc-text">J - Master of GCD</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%EF%BC%9A-5"><span class="toc-number">1.8.1.</span> <span class="toc-text">题意：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3%EF%BC%9A-6"><span class="toc-number">1.8.2.</span> <span class="toc-text">题解：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A-6"><span class="toc-number">1.8.3.</span> <span class="toc-text">代码：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#K-Monthly-Expense"><span class="toc-number">1.9.</span> <span class="toc-text">K - Monthly Expense</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%EF%BC%9A-6"><span class="toc-number">1.9.1.</span> <span class="toc-text">题意：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3%EF%BC%9A-7"><span class="toc-number">1.9.2.</span> <span class="toc-text">题解：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A-7"><span class="toc-number">1.9.3.</span> <span class="toc-text">代码：</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#GDUFE2022-ACM-%E7%AC%AC%E5%9B%9B%E5%91%A8%E9%A2%98%E5%8D%95"><span class="toc-number">1.</span> <span class="toc-text">GDUFE2022_ACM 第四周题单</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#A-%E6%A3%8B%E7%9B%98%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.</span> <span class="toc-text">A - 棋盘问题 </span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%EF%BC%9A"><span class="toc-number">1.1.1.</span> <span class="toc-text">题意：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3%EF%BC%9A"><span class="toc-number">1.1.2.</span> <span class="toc-text">题解：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="toc-number">1.1.3.</span> <span class="toc-text">代码：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B-Dungeon-Master"><span class="toc-number">1.2.</span> <span class="toc-text">B - Dungeon Master </span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%EF%BC%9A-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">题意：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3%EF%BC%9A-1"><span class="toc-number">1.2.2.</span> <span class="toc-text">题解：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A-1"><span class="toc-number">1.2.3.</span> <span class="toc-text">代码：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E2%80%93-Eight"><span class="toc-number">1.3.</span> <span class="toc-text">C – Eight </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#D-%E2%80%93-Pots"><span class="toc-number">1.4.</span> <span class="toc-text">D – Pots </span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%EF%BC%9A-2"><span class="toc-number">1.4.1.</span> <span class="toc-text">题意：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3%EF%BC%9A-2"><span class="toc-number">1.4.2.</span> <span class="toc-text">题解：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A-2"><span class="toc-number">1.4.3.</span> <span class="toc-text">代码：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#E-Ignatius-and-the-Princess-IV"><span class="toc-number">1.5.</span> <span class="toc-text">E - Ignatius and the Princess IV</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%EF%BC%9A-3"><span class="toc-number">1.5.1.</span> <span class="toc-text">题意：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3%EF%BC%9A-3"><span class="toc-number">1.5.2.</span> <span class="toc-text">题解：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">方法一：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A-3"><span class="toc-number">1.5.3.</span> <span class="toc-text">代码：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A"><span class="toc-number">1.5.3.1.</span> <span class="toc-text">方法二：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#F-%E5%85%8D%E8%B4%B9%E9%A6%85%E9%A5%BC"><span class="toc-number">1.6.</span> <span class="toc-text">F - 免费馅饼</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%EF%BC%9A-4"><span class="toc-number">1.6.1.</span> <span class="toc-text">题意：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3%EF%BC%9A-4"><span class="toc-number">1.6.2.</span> <span class="toc-text">题解：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A-4"><span class="toc-number">1.6.3.</span> <span class="toc-text">代码：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#G-Pie"><span class="toc-number">1.7.</span> <span class="toc-text">G - Pie</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%EF%BC%9A-5"><span class="toc-number">1.7.1.</span> <span class="toc-text">题意：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3%EF%BC%9A-5"><span class="toc-number">1.7.2.</span> <span class="toc-text">题解：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A-5"><span class="toc-number">1.7.3.</span> <span class="toc-text">代码：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-Color-the-ball"><span class="toc-number">1.8.</span> <span class="toc-text">I - Color the ball</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%EF%BC%9A%E4%B8%AD%E6%96%87%E8%87%AA%E5%B7%B1%E7%9C%8B"><span class="toc-number">1.8.1.</span> <span class="toc-text">题意：中文自己看</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3%EF%BC%9A-6"><span class="toc-number">1.8.2.</span> <span class="toc-text">题解：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A-6"><span class="toc-number">1.8.3.</span> <span class="toc-text">代码：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#J-Master-of-GCD"><span class="toc-number">1.9.</span> <span class="toc-text">J - Master of GCD</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%EF%BC%9A-6"><span class="toc-number">1.9.1.</span> <span class="toc-text">题意：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3%EF%BC%9A-7"><span class="toc-number">1.9.2.</span> <span class="toc-text">题解：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A-7"><span class="toc-number">1.9.3.</span> <span class="toc-text">代码：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#K-Monthly-Expense"><span class="toc-number">1.10.</span> <span class="toc-text">K - Monthly Expense</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%EF%BC%9A-7"><span class="toc-number">1.10.1.</span> <span class="toc-text">题意：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3%EF%BC%9A-8"><span class="toc-number">1.10.2.</span> <span class="toc-text">题解：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A-8"><span class="toc-number">1.10.3.</span> <span class="toc-text">代码：</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
