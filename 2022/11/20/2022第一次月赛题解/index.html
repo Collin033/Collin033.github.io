@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://Collin033.github.io">
   <title>2022第一次月赛题解 | Collin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="2022第一次月赛题解7-1 真假签到题暴力搜索区间(l,r)内二进制1最多的数字即可 7-2 去徒步啦正难反易因为正向解决这个问题比较困难，所以我们可以将问题转化为求出不存在相邻元素颜色相同的染色方案数，然后用所有排列的情况减去。 对于序列中的每一个人，只要和前一个人的颜色不同就可以了，所以共有m-1种选择。对于第一个人无论选什么颜色都可以，那么就有m种选择。 所以ans&#x3D;$m^n$-m*${(">
+  <meta name="description" content="2022第一次月赛题解">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2022第一次月赛题解">
 <meta property="og:url" content="https://collin033.github.io/2022/11/20/2022%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%9C%88%E8%B5%9B%E9%A2%98%E8%A7%A3/index.html">
 <meta property="og:site_name" content="Collin">
-<meta property="og:description" content="2022第一次月赛题解7-1 真假签到题暴力搜索区间(l,r)内二进制1最多的数字即可 7-2 去徒步啦正难反易因为正向解决这个问题比较困难，所以我们可以将问题转化为求出不存在相邻元素颜色相同的染色方案数，然后用所有排列的情况减去。 对于序列中的每一个人，只要和前一个人的颜色不同就可以了，所以共有m-1种选择。对于第一个人无论选什么颜色都可以，那么就有m种选择。 所以ans&#x3D;$m^n$-m*${(">
+<meta property="og:description" content="2022第一次月赛题解">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-11-19T16:02:53.000Z">
-<meta property="article:modified_time" content="2022-11-19T16:04:02.407Z">
+<meta property="article:modified_time" content="2022-11-19T16:05:23.594Z">
 <meta property="article:author" content="Collin">
 <meta name="twitter:card" content="summary">
   
@@ -182,7 +182,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="2022第一次月赛题解"><a href="#2022第一次月赛题解" class="headerlink" title="2022第一次月赛题解"></a>2022第一次月赛题解</h1><h2 id="7-1-真假签到题"><a href="#7-1-真假签到题" class="headerlink" title="7-1 真假签到题"></a>7-1 真假签到题</h2><p>暴力搜索区间(l,r)内二进制1最多的数字即可</p>
+        <h1 id="2022第一次月赛题解"><a href="#2022第一次月赛题解" class="headerlink" title="2022第一次月赛题解"></a>2022第一次月赛题解</h1><span id="more"></span>      
+<h2 id="7-1-真假签到题"><a href="#7-1-真假签到题" class="headerlink" title="7-1 真假签到题"></a>7-1 真假签到题</h2><p>暴力搜索区间(l,r)内二进制1最多的数字即可</p>
 <h2 id="7-2-去徒步啦"><a href="#7-2-去徒步啦" class="headerlink" title="7-2 去徒步啦"></a>7-2 去徒步啦</h2><p>正难反易<br>因为正向解决这个问题比较困难，所以我们可以将问题转化为求出不存在相邻元素颜色相同的染色方案数，然后用所有排列的情况减去。</p>
 <p>对于序列中的每一个人，只要和前一个人的颜色不同就可以了，所以共有m-1种选择。对于第一个人无论选什么颜色都可以，那么就有m种选择。</p>
 <p>所以ans=$m^n$-m*${(m-1)}^{(n-1)}$。</p>
