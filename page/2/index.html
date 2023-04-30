@@ -6,17 +6,13 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://Collin033.github.io">
-  <title>归并排序模板 | Collin</title>
+  <title>Collin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="归并排序">
-<meta property="og:type" content="article">
-<meta property="og:title" content="归并排序模板">
-<meta property="og:url" content="https://collin033.github.io/2023/04/08/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E6%A8%A1%E6%9D%BF/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Collin">
+<meta property="og:url" content="https://collin033.github.io/page/2/index.html">
 <meta property="og:site_name" content="Collin">
-<meta property="og:description" content="归并排序">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-04-07T16:08:29.000Z">
-<meta property="article:modified_time" content="2023-04-07T16:10:03.001Z">
 <meta property="article:author" content="Collin">
 <meta name="twitter:card" content="summary">
   
@@ -162,54 +158,32 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-归并排序模板" class="article article-type-post " itemscope itemprop="blogPost">
+            
+  
+    <article id="post-第二周题单题解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      归并排序模板
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/10/27/%E7%AC%AC%E4%BA%8C%E5%91%A8%E9%A2%98%E5%8D%95%E9%A2%98%E8%A7%A3/">第二周题单题解</a>
     </h1>
   
 
         
-        <a href="/2023/04/08/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E6%A8%A1%E6%9D%BF/" class="archive-article-date">
-  	<time datetime="2023-04-07T16:08:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-08</time>
+        <a href="/2022/10/27/%E7%AC%AC%E4%BA%8C%E5%91%A8%E9%A2%98%E5%8D%95%E9%A2%98%E8%A7%A3/" class="archive-article-date">
+  	<time datetime="2022-10-27T12:39:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-27</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><span id="more"></span>    
-
-<h2 id="求逆序对数量AcWing-788-逆序对的数量"><a href="#求逆序对数量AcWing-788-逆序对的数量" class="headerlink" title="求逆序对数量AcWing 788. 逆序对的数量"></a>求逆序对数量AcWing 788. 逆序对的数量</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e5</span>+<span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[N],b[N];</span><br><span class="line"><span class="keyword">int</span> n,cnt=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> mid,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i=l,t=<span class="number">0</span>,j=mid+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(i&lt;=mid &amp;&amp; j&lt;=r)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i]&gt;a[j])</span><br><span class="line">        &#123;</span><br><span class="line">            b[++t]=a[j++];</span><br><span class="line">            cnt+=mid-i+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            b[++t]=a[i++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(i&lt;=mid)</span><br><span class="line">        b[++t]=a[i++];</span><br><span class="line">    <span class="keyword">while</span>(j&lt;=r)</span><br><span class="line">        b[++t]=a[j++];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=t;i++)</span><br><span class="line">        a[l+i<span class="number">-1</span>]=b[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergesort</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l&lt;r)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        <span class="built_in">mergesort</span>(l,mid);</span><br><span class="line">        <span class="built_in">mergesort</span>(mid+<span class="number">1</span>,r);</span><br><span class="line">        <span class="built_in">merge</span>(l,mid,r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        cin&gt;&gt;a[i];</span><br><span class="line">    <span class="built_in">mergesort</span>(<span class="number">1</span>,n);</span><br><span class="line">    cout&lt;&lt;cnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+        <h1 id="GDUFE2022-ACM-第二周题单"><a href="#GDUFE2022-ACM-第二周题单" class="headerlink" title="GDUFE2022_ACM 第二周题单"></a>GDUFE2022_ACM 第二周题单</h1>
+        
       
 
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -218,84 +192,16 @@
       
 
       
-
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/10/27/%E7%AC%AC%E4%BA%8C%E5%91%A8%E9%A2%98%E5%8D%95%E9%A2%98%E8%A7%A3/">展开全文 >></a>
+        </p>
       
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
 
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://collin033.github.io/2023/04/08/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E6%A8%A1%E6%9D%BF/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2023/04/24/KMP%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          KMP算法模板
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2023/04/07/%E6%9C%89%E5%85%B3%E6%97%B6%E9%97%B4%E5%A4%84%E7%90%86%E7%9A%84%E4%B8%80%E4%BA%9B%E9%A2%98%E7%9B%AE/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">有关时间处理的一些题目</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -310,62 +216,17 @@
         </div>
         
         
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F"><span class="toc-number">1.</span> <span class="toc-text">归并排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B1%82%E9%80%86%E5%BA%8F%E5%AF%B9%E6%95%B0%E9%87%8FAcWing-788-%E9%80%86%E5%BA%8F%E5%AF%B9%E7%9A%84%E6%95%B0%E9%87%8F"><span class="toc-number">2.</span> <span class="toc-text">求逆序对数量AcWing 788. 逆序对的数量</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
     </div>
 </aside>
 
 
 
-  
-  <div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="归并排序模板" data-title="归并排序模板" data-url="https://Collin033.github.io/2023/04/08/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E6%A8%A1%E6%9D%BF/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"true"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
 
   
   
-  
-
-  
-  <div id="SOHUCS" sid="归并排序模板" ></div> 
-<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
-<script type="text/javascript">
-    window.changyan.api.config({
-        appid: "true",
-        conf: "true"
-    });
-</script>
-</script>
-  
-
-  
-
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
   
 
 
@@ -391,8 +252,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: false,
-		isPost: true,
+		isHome: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
