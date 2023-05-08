@@ -6,17 +6,13 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://Collin033.github.io">
-  <title>第三周题单题解 | Collin</title>
+  <title>Tag: 动态规划 | Collin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="GDUFE2022_ACM 第三周题单">
-<meta property="og:type" content="article">
-<meta property="og:title" content="第三周题单题解">
-<meta property="og:url" content="https://collin033.github.io/2022/11/03/%E7%AC%AC%E4%B8%89%E5%91%A8%E9%A2%98%E5%8D%95%E9%A2%98%E8%A7%A3/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Collin">
+<meta property="og:url" content="https://collin033.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/index.html">
 <meta property="og:site_name" content="Collin">
-<meta property="og:description" content="GDUFE2022_ACM 第三周题单">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-11-03T07:00:17.000Z">
-<meta property="article:modified_time" content="2022-11-03T07:37:23.861Z">
 <meta property="article:author" content="Collin">
 <meta name="twitter:card" content="summary">
   
@@ -162,249 +158,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-第三周题单题解" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      第三周题单题解
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2023" class="archive-year">2023</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2023/05/06/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2023-05-06T09:41:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-05-06</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2023/05/06/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/">背包问题</a>
     </h1>
   
 
-        
-        <a href="/2022/11/03/%E7%AC%AC%E4%B8%89%E5%91%A8%E9%A2%98%E5%8D%95%E9%A2%98%E8%A7%A3/" class="archive-article-date">
-  	<time datetime="2022-11-03T07:00:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="GDUFE2022-ACM-第三周题单"><a href="#GDUFE2022-ACM-第三周题单" class="headerlink" title="GDUFE2022_ACM 第三周题单"></a>GDUFE2022_ACM 第三周题单</h1><span id="more"></span>     
-<p>Author:天桐  </p>
-<h2 id="预估难度："><a href="#预估难度：" class="headerlink" title="预估难度："></a>预估难度：</h2><h3 id="Easy"><a href="#Easy" class="headerlink" title="Easy"></a>Easy</h3><p>A,B,C,D,F,K  </p>
-<h3 id="Normal"><a href="#Normal" class="headerlink" title="Normal"></a>Normal</h3><p> E,I,L,M,J</p>
-<h3 id="Hard"><a href="#Hard" class="headerlink" title="Hard"></a>Hard</h3><p>G,H</p>
-<h2 id="A-最大的公约数"><a href="#A-最大的公约数" class="headerlink" title="A - 最大的公约数 "></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/526444#problem/A">A - 最大的公约数 </a></h2><p>当n为偶数时，其最小的因子只能是2</p>
-<p>当n为奇数时，其最小的因子只能是3</p>
-<p>那么假设n为偶数，取a = n，b = n/2，则n/2即为答案</p>
-<p>假设n为奇数，那么n - 1为偶数，所以（n - 1）/2为答案</p>
-<p>（因为最小的因子只可能是3，n/3 明显小于等于 (n - 1)/2）</p>
-<h2 id="B-最喜欢的序列"><a href="#B-最喜欢的序列" class="headerlink" title="B - 最喜欢的序列 "></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/526444#problem/B">B - 最喜欢的序列 </a></h2><p>数组模拟，输出头尾</p>
-<h2 id="C-一个数学问题"><a href="#C-一个数学问题" class="headerlink" title="C - 一个数学问题 "></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/526444#problem/C">C - 一个数学问题 </a></h2><p>不难看出，对于k^k &lt;= 10 ^ 18来说，k的范围在1~15之间。</p>
-<p>只需要遍历1~15即可</p>
-<h2 id="D-最右边的数字"><a href="#D-最右边的数字" class="headerlink" title="D - 最右边的数字 "></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/526444#problem/D">D - 最右边的数字 </a></h2><p>不难看出，该题只需要考虑个位数。只需要在快速幂的过程中%10即可。</p>
-<p>当然，打表也是一种好方法，对于每个个位数，情况有限，可以尝试一下。</p>
-<h2 id="E-士兵队列"><a href="#E-士兵队列" class="headerlink" title="E - 士兵队列 "></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/526444#problem/E">E - 士兵队列 </a></h2><p>建议使用vector来模拟。</p>
-<h2 id="F-狐狸和蛇"><a href="#F-狐狸和蛇" class="headerlink" title="F - 狐狸和蛇 "></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/526444#problem/F">F - 狐狸和蛇 </a></h2><p>略。</p>
-<h2 id="G-木棍"><a href="#G-木棍" class="headerlink" title="G - 木棍 "></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/526444#problem/G">G - 木棍 </a></h2><p>大意：给定n个木棍的长度length和重量weight，第一根木棍的加工长度为1分钟。而后对于每根木棍stick[i],如果下一根木棍的长度和重量均大于该stick[i]，则不需要花费额外的时间加工，否则还是需要1分钟。</p>
-<ol>
-<li>对木棍的长度(或重量)进行升序排序，同时保证长度相等的情况下，重量也是升序排序的。</li>
-<li>定义一个标记数组flag[]，用于记录该木棍是否被加工。</li>
-<li>从头开始取木棍，使用两个变量l,w来记录当前加工的木棍的长度和重量。加工完一个木棍后，遍历后序的木棍(注意是否已经被加工)，如果符合length[j] &gt;= l &amp;&amp; weight[j] &gt;= w 则更新l,w，并将该木棍标记为已加工。</li>
-</ol>
-<p>主体代码：</p>
-<pre><code class="c,cpp">int ans = 0;
-for(i = 1 to n)&#123;
-    ans++;
-    for(j = i + 1 to n)&#123;
-         if(length[j] &gt;= l &amp;&amp; weight[j] &gt;= w)&#123;
-             flag[j] = 1;
-              l = length[j],w = weight[j];
-        &#125;
-    &#125;
-&#125;
-</code></pre>
-<h2 id="H-我需要一份OFFER"><a href="#H-我需要一份OFFER" class="headerlink" title="H - 我需要一份OFFER "></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/526444#problem/H">H - 我需要一份OFFER </a></h2><p>01背包问题。</p>
-<p>转移方程：dp[j] = min(dp[j], dp[j - offer[i].v] * offer[i].x);</p>
-<h2 id="I-网页浏览"><a href="#I-网页浏览" class="headerlink" title="I - 网页浏览 "></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/526444#problem/I">I - 网页浏览 </a></h2><p>根据题目模拟即可</p>
-<h2 id="J-报销"><a href="#J-报销" class="headerlink" title="J - 报销 "></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/526444#problem/J">J - 报销 </a></h2><p>对于每张发票，只需考虑单个物品是否大于600且总金额是否大于1000，最后总报销金额是否大于报销额度即可</p>
-<h2 id="K-一个难题"><a href="#K-一个难题" class="headerlink" title="K - 一个难题 "></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/526444#problem/K">K - 一个难题 </a></h2><p> 与D题一致</p>
-<h2 id="L-网页浏览"><a href="#L-网页浏览" class="headerlink" title="L - 网页浏览 "></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/526444#problem/L">L - 网页浏览 </a></h2><p>使用队列和栈模拟即可</p>
-<h2 id="M-勇者游戏"><a href="#M-勇者游戏" class="headerlink" title="M - 勇者游戏 "></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/526444#problem/M">M - 勇者游戏 </a></h2><p>显然，当n % (m + 1) == 0时，second胜利，否则first胜利</p>
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
-      
+          
 
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
         </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://collin033.github.io/2022/11/03/%E7%AC%AC%E4%B8%89%E5%91%A8%E9%A2%98%E5%8D%95%E9%A2%98%E8%A7%A3/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2022/11/11/%E7%AC%AC%E5%9B%9B%E5%91%A8%E9%A2%98%E5%8D%95%E9%A2%98%E8%A7%A3/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          第四周题单题解
-        
-      </div>
-    </a>
   
   
-    <a href="/2022/10/27/%E7%AC%AC%E4%BA%8C%E5%91%A8%E9%A2%98%E5%8D%95%E9%A2%98%E8%A7%A3/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">第二周题单题解</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#GDUFE2022-ACM-%E7%AC%AC%E4%B8%89%E5%91%A8%E9%A2%98%E5%8D%95"><span class="toc-number">1.</span> <span class="toc-text">GDUFE2022_ACM 第三周题单</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%84%E4%BC%B0%E9%9A%BE%E5%BA%A6%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">预估难度：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Easy"><span class="toc-number">1.1.1.</span> <span class="toc-text">Easy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Normal"><span class="toc-number">1.1.2.</span> <span class="toc-text">Normal</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hard"><span class="toc-number">1.1.3.</span> <span class="toc-text">Hard</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#A-%E6%9C%80%E5%A4%A7%E7%9A%84%E5%85%AC%E7%BA%A6%E6%95%B0"><span class="toc-number">1.2.</span> <span class="toc-text">A - 最大的公约数 </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B-%E6%9C%80%E5%96%9C%E6%AC%A2%E7%9A%84%E5%BA%8F%E5%88%97"><span class="toc-number">1.3.</span> <span class="toc-text">B - 最喜欢的序列 </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E4%B8%80%E4%B8%AA%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98"><span class="toc-number">1.4.</span> <span class="toc-text">C - 一个数学问题 </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#D-%E6%9C%80%E5%8F%B3%E8%BE%B9%E7%9A%84%E6%95%B0%E5%AD%97"><span class="toc-number">1.5.</span> <span class="toc-text">D - 最右边的数字 </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#E-%E5%A3%AB%E5%85%B5%E9%98%9F%E5%88%97"><span class="toc-number">1.6.</span> <span class="toc-text">E - 士兵队列 </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#F-%E7%8B%90%E7%8B%B8%E5%92%8C%E8%9B%87"><span class="toc-number">1.7.</span> <span class="toc-text">F - 狐狸和蛇 </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#G-%E6%9C%A8%E6%A3%8D"><span class="toc-number">1.8.</span> <span class="toc-text">G - 木棍 </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#H-%E6%88%91%E9%9C%80%E8%A6%81%E4%B8%80%E4%BB%BDOFFER"><span class="toc-number">1.9.</span> <span class="toc-text">H - 我需要一份OFFER </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-%E7%BD%91%E9%A1%B5%E6%B5%8F%E8%A7%88"><span class="toc-number">1.10.</span> <span class="toc-text">I - 网页浏览 </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#J-%E6%8A%A5%E9%94%80"><span class="toc-number">1.11.</span> <span class="toc-text">J - 报销 </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#K-%E4%B8%80%E4%B8%AA%E9%9A%BE%E9%A2%98"><span class="toc-number">1.12.</span> <span class="toc-text">K - 一个难题 </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#L-%E7%BD%91%E9%A1%B5%E6%B5%8F%E8%A7%88"><span class="toc-number">1.13.</span> <span class="toc-text">L - 网页浏览 </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#M-%E5%8B%87%E8%80%85%E6%B8%B8%E6%88%8F"><span class="toc-number">1.14.</span> <span class="toc-text">M - 勇者游戏 </span></a></li></ol></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
-
-
-
-  
-  <div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="第三周题单题解" data-title="第三周题单题解" data-url="https://Collin033.github.io/2022/11/03/%E7%AC%AC%E4%B8%89%E5%91%A8%E9%A2%98%E5%8D%95%E9%A2%98%E8%A7%A3/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"true"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-  
-  
+    </div></section>
   
 
-  
-  <div id="SOHUCS" sid="第三周题单题解" ></div> 
-<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
-<script type="text/javascript">
-    window.changyan.api.config({
-        appid: "true",
-        conf: "true"
-    });
-</script>
-</script>
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -430,9 +237,9 @@ for(i = 1 to n)&#123;
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
