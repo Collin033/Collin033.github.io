@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://Collin033.github.io">
-  <title>Acwing1010 | Collin</title>
+  <title>C++11中的原始字符串类型 | Collin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="AcWing1010_拦截导弹(LIS)">
+  <meta name="description" content="C++11中的原始字符串类型">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Acwing1010">
-<meta property="og:url" content="https://collin033.github.io/2023/05/28/Acwing1010/index.html">
+<meta property="og:title" content="C++11中的原始字符串类型">
+<meta property="og:url" content="https://collin033.github.io/2023/07/29/C-11%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%A7%8B%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B/index.html">
 <meta property="og:site_name" content="Collin">
-<meta property="og:description" content="AcWing1010_拦截导弹(LIS)">
+<meta property="og:description" content="C++11中的原始字符串类型">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-05-28T15:18:27.000Z">
-<meta property="article:modified_time" content="2023-05-28T15:21:08.214Z">
+<meta property="article:published_time" content="2023-07-29T09:54:51.000Z">
+<meta property="article:modified_time" content="2023-07-29T10:07:12.901Z">
 <meta property="article:author" content="Collin">
-<meta property="article:tag" content="题解">
+<meta property="article:tag" content="C++学习笔记">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Collin" type="application/atom+xml">
@@ -163,29 +163,54 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Acwing1010" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-C-11中的原始字符串类型" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Acwing1010
+      C++11中的原始字符串类型
     </h1>
   
 
         
-        <a href="/2023/05/28/Acwing1010/" class="archive-article-date">
-  	<time datetime="2023-05-28T15:18:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-05-28</time>
+        <a href="/2023/07/29/C-11%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%A7%8B%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B/" class="archive-article-date">
+  	<time datetime="2023-07-29T09:54:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-29</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="AcWing1010-拦截导弹-LIS"><a href="#AcWing1010-拦截导弹-LIS" class="headerlink" title="AcWing1010_拦截导弹(LIS)"></a>AcWing1010_拦截导弹(LIS)</h1><span id="more"></span>   
+        <h1 id="C-11中的原始字符串类型"><a href="#C-11中的原始字符串类型" class="headerlink" title="C++11中的原始字符串类型"></a>C++11中的原始字符串类型</h1><span id="more"></span>   
 
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> endl <span class="meta-string">&quot;\n&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e05</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[N];</span><br><span class="line"><span class="keyword">int</span> f[N];</span><br><span class="line"><span class="keyword">int</span> q[N], g[N];</span><br><span class="line"><span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (cin &gt;&gt; a[n])</span><br><span class="line">        n++;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> lon = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        f[i] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (a[j] &gt; a[i])</span><br><span class="line">            &#123;</span><br><span class="line">                f[i] = <span class="built_in">max</span>(f[i], f[j] + <span class="number">1</span>);</span><br><span class="line">                lon = <span class="built_in">max</span>(f[i], lon);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; lon &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (k&lt;cnt &amp;&amp; g[k] &lt; a[i] )</span><br><span class="line">            k++;</span><br><span class="line">        g[k] = a[i];</span><br><span class="line">        <span class="keyword">if</span> (k &gt;= cnt)</span><br><span class="line">            cnt++;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; cnt &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>在原始字符串中，字符表示的就是自己，例如，序列\n不表示换行符，而表示两个常规字符——斜杠和n，因此在屏幕上显示时，将显示这两个字符。</p>
+<p>原始字符串将”( 和 )”用作定界符，并使用前缀R来标识原始字符串：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cout &lt;&lt; R&quot;(hello\n)&quot;;</span><br></pre></td></tr></table></figure>
+
+<p>但另外，如果要在原始字符串中包含)”时，编译器见到第一个)”时，会认为字符串到此结束。但原始字符串语法允许在表示字符串开头的”和(之间添加其他字符，这意味着表示字符串结束的”和）之间也必须包含这些字符：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cout &lt;&lt; <span class="string">R&quot;+*(hello&quot;)\n)+*&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="代码示例1"><a href="#代码示例1" class="headerlink" title="代码示例1"></a>代码示例1</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">R&quot;(hello\n)&quot;</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello\n</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="代码示例2"><a href="#代码示例2" class="headerlink" title="代码示例2"></a>代码示例2</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">R&quot;+*(hello&quot;)\n)+*&quot;</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="输出-1"><a href="#输出-1" class="headerlink" title="输出"></a>输出</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello&quot;)\n</span><br></pre></td></tr></table></figure>
+
+
 
 
       
@@ -221,7 +246,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">题解</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C++学习笔记</a>
         		</li>
       		
 		</ul>
@@ -277,7 +302,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://collin033.github.io/2023/05/28/Acwing1010/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://collin033.github.io/2023/07/29/C-11%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%A7%8B%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -291,18 +316,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2023/05/29/Acwing-187%E5%AF%BC%E5%BC%B9%E9%98%B2%E5%BE%A1%E7%B3%BB%E7%BB%9F/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Acwing 187导弹防御系统
-        
-      </div>
-    </a>
   
-  
-    <a href="/2023/05/19/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E9%A2%98%E7%9B%AE%E9%9B%86/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">动态规划题目集</div>
+    <a href="/2023/07/08/%E6%9C%80%E5%A4%A7%E5%BC%82%E6%88%96%E5%92%8C/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">最大异或和</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -329,7 +345,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#AcWing1010-%E6%8B%A6%E6%88%AA%E5%AF%BC%E5%BC%B9-LIS"><span class="toc-number">1.</span> <span class="toc-text">AcWing1010_拦截导弹(LIS)</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#C-11%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%A7%8B%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.</span> <span class="toc-text">C++11中的原始字符串类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B1"><span class="toc-number">1.1.</span> <span class="toc-text">代码示例1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA"><span class="toc-number">1.1.1.</span> <span class="toc-text">输出</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B2"><span class="toc-number">1.2.</span> <span class="toc-text">代码示例2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">输出</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -343,7 +359,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Acwing1010" data-title="Acwing1010" data-url="https://Collin033.github.io/2023/05/28/Acwing1010/"></div>
+	<div class="ds-thread" data-thread-key="C-11中的原始字符串类型" data-title="C++11中的原始字符串类型" data-url="https://Collin033.github.io/2023/07/29/C-11%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%A7%8B%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -365,7 +381,7 @@
   
 
   
-  <div id="SOHUCS" sid="Acwing1010" ></div> 
+  <div id="SOHUCS" sid="C-11中的原始字符串类型" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
