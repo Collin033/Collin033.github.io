@@ -16,7 +16,7 @@
 <meta property="og:description" content="strcpy函数">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-08-29T09:10:43.000Z">
-<meta property="article:modified_time" content="2023-08-29T14:57:48.349Z">
+<meta property="article:modified_time" content="2023-09-02T03:37:51.869Z">
 <meta property="article:author" content="Collin">
 <meta name="twitter:card" content="summary">
   
@@ -216,6 +216,19 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">getline</span>(cin,str)</span><br></pre></td></tr></table></figure>
 
 <p>这里没有使用句点表示法，这表明这个getline()不是类方法。它将cin作为参数，指出哪里去查找输入。另外，也没有指出字符串长度的参数，因为string对象将根据字符串长度自动调整自己的大小。</p>
+<h1 id="strcmp函数"><a href="#strcmp函数" class="headerlink" title="strcmp函数"></a>strcmp函数</h1><p>用于检测相等或排列顺序：</p>
+<p>可以使用strcmp()来测试C风格字符串是否相等（排列顺序）。如果str1和str2相等，则下面的表达式为true：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">strcmp</span>(str1,str2)==<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>如果str1和str2不相等，则下面两个表达式都为true：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">strcmp</span>(str1,str2)!=<span class="number">0</span></span><br><span class="line"><span class="built_in">strcmp</span>(str1,str2)</span><br></pre></td></tr></table></figure>
+
+<p>如果str1在str2前面，则下面的表达式为true：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">strcmp</span>(str1,str2)&lt;<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>如果str1在str2后面，则下面的表达式为true：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">strcmp</span>(str1,str2)&gt;<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
 
       
 
@@ -309,6 +322,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2023/09/05/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          树状数组
+        
+      </div>
+    </a>
+  
   
     <a href="/2023/08/14/%E6%90%9C%E7%B4%A2/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">搜索</div>
@@ -338,7 +360,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#strcpy%E5%87%BD%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">strcpy函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#cppreference%E4%B8%AD%E5%AE%9A%E4%B9%89"><span class="toc-number">1.1.</span> <span class="toc-text">cppreference中定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90"><span class="toc-number">1.2.</span> <span class="toc-text">例子</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#strcat%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">strcat函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#cppreference%E4%B8%AD%E5%AE%9A%E4%B9%89-1"><span class="toc-number">2.1.</span> <span class="toc-text">cppreference中定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90-1"><span class="toc-number">2.2.</span> <span class="toc-text">例子</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#string%E7%B1%BBI-O"><span class="toc-number">3.</span> <span class="toc-text">string类I&#x2F;O</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#cin-getline"><span class="toc-number">3.1.</span> <span class="toc-text">cin.getline()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gitline"><span class="toc-number">3.2.</span> <span class="toc-text">gitline()</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#strcpy%E5%87%BD%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">strcpy函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#cppreference%E4%B8%AD%E5%AE%9A%E4%B9%89"><span class="toc-number">1.1.</span> <span class="toc-text">cppreference中定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90"><span class="toc-number">1.2.</span> <span class="toc-text">例子</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#strcat%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">strcat函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#cppreference%E4%B8%AD%E5%AE%9A%E4%B9%89-1"><span class="toc-number">2.1.</span> <span class="toc-text">cppreference中定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90-1"><span class="toc-number">2.2.</span> <span class="toc-text">例子</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#string%E7%B1%BBI-O"><span class="toc-number">3.</span> <span class="toc-text">string类I&#x2F;O</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#cin-getline"><span class="toc-number">3.1.</span> <span class="toc-text">cin.getline()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gitline"><span class="toc-number">3.2.</span> <span class="toc-text">gitline()</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#strcmp%E5%87%BD%E6%95%B0"><span class="toc-number">4.</span> <span class="toc-text">strcmp函数</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -483,7 +505,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -491,11 +513,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color3">C++学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C++学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
               </li>
             
             <div class="clearfix"></div>
