@@ -99,4 +99,4 @@ deploy:
   type: git
   repo: https://github.com/Collin033/Collin033.github.io.git
   branch: main
-  message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}"
+  message: "Deploy generated site"
