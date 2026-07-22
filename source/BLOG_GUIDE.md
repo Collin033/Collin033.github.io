@@ -6,23 +6,25 @@
 
 ## 1. 开始之前：先了解当前博客的状态
 
-当前电脑上的 `D:\blog` 是从 GitHub 恢复下来的**静态网站成品仓库**。
+当前博客已经完成源码重建。平时应在 `D:\blog-source` 中写作和维护，`D:\blog` 只保留旧静态站点及恢复记录。
 
 现有网站由以下工具生成：
 
-- Hexo 5.4.0；
+- Hexo 7.3.0；
 - Yilia 风格主题；
 - GitHub Pages；
-- `main` 分支保存最终生成的 HTML、CSS、JavaScript 和图片。
+- `source` 分支保存 Markdown、配置、主题和依赖清单；
+- GitHub Actions 在每次推送 `source` 分支后自动构建并发布网站。
 
-旧电脑上的 Hexo 源码没有上传到 GitHub，因此目前缺少：
+旧电脑上的 Hexo 源码曾经丢失，但已经从生成后的网页完成恢复：
 
-- `_config.yml` 等 Hexo 配置文件；
-- `source\_posts` 中的 Markdown 文章源稿；
-- 原主题目录及主题配置；
-- `package.json` 和依赖版本记录。
+- 已恢复 25 篇旧文章；
+- 已保留 98 个代码块；
+- 已找回 2 张仍存在于网页或 Git 历史中的图片；
+- 7 张从未上传到 Git 的旧电脑本地图片无法找回，文章中已用提示替代死链；
+- 已建立 `source` 分支和自动部署工作流。
 
-现有仓库中还能看到 25 篇旧文章生成后的 HTML 页面，但这些 HTML 不适合直接继续写博客。
+以后不要再从 HTML 反向恢复文章，Markdown 源稿会直接备份到 GitHub 的 `source` 分支。
 
 ### 1.1 两个目录分别做什么
 
@@ -31,34 +33,34 @@
 | 目录 | 用途 | 是否直接编辑 |
 | --- | --- | --- |
 | `D:\blog-source` | Hexo 源码、Markdown 文章、主题和配置 | 是，平时主要使用这里 |
-| `D:\blog` | GitHub Pages 最终静态网页 | 否，只用于检查或紧急恢复 |
+| `D:\blog` | 旧静态站点和恢复工具 | 否，只用于检查或紧急恢复 |
 
 简单理解：
 
 ```text
-在 blog-source 写 Markdown
-            ↓
-Hexo 生成 HTML 静态网站
-            ↓
-推送到 GitHub 的 main 分支
-            ↓
+在 blog-source 写 Markdown 并本地预览
+                    ↓
+推送到 GitHub 的 source 分支
+                    ↓
+GitHub Actions 自动运行 Hexo
+                    ↓
 GitHub Pages 发布到 collin033.github.io
 ```
 
 ## 2. 最重要的警告
 
-在旧文章没有迁移回 `D:\blog-source\source\_posts` 之前，**不要直接执行第一次 `hexo deploy`**。
+旧文章迁移已经完成。今后日常发布**不需要执行 `hexo deploy`**，只需推送 `source` 分支，由 GitHub Actions 自动发布。
 
-原因是一个全新的 Hexo 项目只包含新文章。直接部署会让首页、归档和标签页只显示新文章，25 篇旧文章可能从网站导航中消失。
+不要直接修改 `main` 分支，也不要手工上传 `public` 目录，否则可能绕过源码备份和自动检查。
 
-正确顺序是：
+现在正确的日常顺序是：
 
-1. 备份当前网站；
-2. 重建 Hexo 源码工程；
-3. 把旧文章从 HTML 恢复为 Markdown；
-4. 本地生成并检查新旧文章是否都存在；
-5. 首次部署；
-6. 以后按照日常流程写文章。
+1. 拉取 `source` 分支；
+2. 编写 Markdown；
+3. 本地预览；
+4. 提交并推送 `source` 分支；
+5. 等待 GitHub Actions 自动发布；
+6. 检查线上文章。
 
 ## 3. 第一次使用：重建 Hexo 源码工程
 
@@ -259,7 +261,7 @@ YAML 文件对缩进很敏感：
 
 ### 3.10 把源码保存到 source 分支
 
-`main` 分支用于最终网页，`source` 分支用于保存 Hexo 源码。
+`source` 分支用于保存 Hexo 源码，也是自动部署工作流的触发分支。`main` 仅保留历史手动部署快照，不再作为日常发布入口。
 
 在 `D:\blog-source` 中运行：
 
@@ -573,28 +575,23 @@ git push origin source
 
 这一步把 Markdown 源稿保存到 GitHub 的 `source` 分支。以后即使换电脑，也能恢复源码。
 
-### 6.3 生成并部署网站
+### 6.3 通过 GitHub Actions 自动部署
 
-确认本地预览没有问题后运行：
+第 6.2 节的 `git push origin source` 完成后，GitHub Actions 会自动执行：
 
-```powershell
+```text
+npm ci
 npx hexo clean
 npx hexo generate
-npx hexo deploy
-```
-
-也可以把生成和部署合并：
-
-```powershell
-npx hexo clean
-npx hexo generate --deploy
+上传 public 构建产物
+部署到 GitHub Pages
 ```
 
 命令含义：
 
-- `clean`：删除旧的本地生成缓存；
-- `generate`：把 Markdown 转换为 HTML；
-- `deploy`：把生成结果推送到 GitHub 的 `main` 分支。
+可以在 GitHub 仓库的 `Actions` 页面查看 `Deploy Hexo site to Pages` 工作流。显示绿色对勾表示发布成功。
+
+不要在日常流程中运行 `npx hexo deploy`，也不要手动强制推送 `main`。
 
 ### 6.4 检查线上结果
 
@@ -606,9 +603,9 @@ npx hexo generate --deploy
 
 1. 按 `Ctrl+F5` 强制刷新；
 2. 等待一两分钟；
-3. 打开 GitHub 仓库，确认 `main` 分支出现新提交；
-4. 检查仓库的 `Settings` → `Pages`；
-5. 确认发布来源仍然是 `main` 分支根目录。
+3. 打开 GitHub 仓库的 `Actions` 页面；
+4. 确认 `Deploy Hexo site to Pages` 工作流为绿色对勾；
+5. 检查仓库的 `Settings` → `Pages`，发布来源应为 `GitHub Actions`。
 
 ## 7. 修改、删除和暂存文章
 
@@ -635,9 +632,9 @@ npx hexo server
 git add .
 git commit -m "Update post: 文章标题"
 git push origin source
-npx hexo clean
-npx hexo generate --deploy
 ```
+
+推送后等待 GitHub Actions 自动发布。
 
 ### 7.2 删除文章
 
@@ -697,12 +694,7 @@ npx hexo clean
 npx hexo server
 ```
 
-最终静态网站通常不需要单独克隆。如需检查 `main` 分支，可以运行：
-
-```powershell
-Set-Location D:\
-git clone --branch main https://github.com/Collin033/Collin033.github.io.git blog
-```
+最终静态网站由 GitHub Actions 作为 Pages 构建产物保存，通常不需要克隆 `main` 分支。
 
 ## 9. 常见问题排查
 
@@ -827,9 +819,7 @@ git add .
 git commit -m "Add post: 文章标题"
 git push origin source
 
-# 6. 发布网站
-npx hexo clean
-npx hexo generate --deploy
+# 6. git push 完成后，等待 GitHub Actions 自动发布
 ```
 
 发布完成后访问：
@@ -841,7 +831,7 @@ npx hexo generate --deploy
 1. 永远在 `D:\blog-source` 写文章，不要直接编辑 `D:\blog` 中生成的 HTML。
 2. 每次写作前先执行 `git pull origin source`。
 3. 每次部署前先本地预览。
-4. 先把 Markdown 推送到 `source` 分支，再部署 `main` 分支。
+4. 推送 `source` 分支后等待 GitHub Actions 自动部署，不要手动强推 `main`。
 5. 图片和文章一起提交。
 6. 不要提交密码、Cookie、令牌、私钥和个人隐私文件。
 7. 不要删除 `.git` 目录。
@@ -851,4 +841,4 @@ npx hexo generate --deploy
 
 ---
 
-目前真正需要优先完成的是第 3.11 节：把旧站点的 25 篇文章恢复为 Markdown，并建立 `D:\blog-source`。完成这次迁移后，日常发文就只需要第 5、6 章中的几个命令。
+旧站点迁移已经完成。今后的日常发文只需要第 5、6 章中的几个命令。
