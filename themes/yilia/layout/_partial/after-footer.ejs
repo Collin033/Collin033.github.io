@@ -19,3 +19,8 @@
 <% if (theme.mathjax){ %>
 <%- partial('mathjax') %>
 <% } %>
+
+<% if (theme.click_heart){ %>
+<!-- 页面点击彩色爱心 -->
+<script type="text/javascript" src="<%- url_for('/love.js') %>"></script>
+<% } %>

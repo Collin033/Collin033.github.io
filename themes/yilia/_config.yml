@@ -68,6 +68,15 @@ favicon: /assets/avatar.jpg
 #你的头像url
 avatar: /assets/avatar.jpg
 
+# 网易云背景音乐（旧站原配置）
+music:
+  enable: true
+  song_id: 1299563516
+  autoplay: true
+
+# 点击页面时显示彩色爱心
+click_heart: true
+
 #是否开启分享
 share_jia: false
 
